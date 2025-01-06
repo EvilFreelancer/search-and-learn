@@ -31,6 +31,7 @@ install_requires = [
     "transformers>=4.47.0",
     "bitsandbytes>=0.45.0",  # quantization
     "fastapi",
+    "hf_transfer",
 ]
 
 setup(
@@ -41,7 +42,7 @@ setup(
     description="A tool for search-based methods on llms",
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/reliable-agents/search-and-learn",
+    url="https://github.com/huggingface/search-and-learn",
     keywords="nlp deep learning mcts",
     license="Apache",
     package_dir={"": "src"},

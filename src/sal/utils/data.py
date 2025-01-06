@@ -17,7 +17,6 @@ from pathlib import Path
 from datasets import Dataset, load_dataset
 from huggingface_hub import (
     create_branch,
-    get_full_repo_name,
     list_repo_commits,
     repo_exists,
 )
@@ -60,7 +59,7 @@ def save_dataset(dataset, config):
                     config.hub_dataset_id,
                     revision=config.revision,
                     split="train",
-                    private=True,
+                    private=config.hub_dataset_private,
                     commit_message=f"Add {config.revision}",
                 )
                 break
@@ -72,5 +71,9 @@ def save_dataset(dataset, config):
         if config.output_dir is None:
             config.output_dir = f"data/{config.model_path}"
         Path(config.output_dir).mkdir(parents=True, exist_ok=True)
-        dataset.to_json(f"{config.output_dir}/bon_completions.jsonl", lines=True)
-        logger.info(f"Saved completions to {config.output_dir}/bon_completions.jsonl")
+        dataset.to_json(
+            f"{config.output_dir}/{config.approach}_completions.jsonl", lines=True
+        )
+        logger.info(
+            f"Saved completions to {config.output_dir}/{config.approach}_completions.jsonl"
+        )
